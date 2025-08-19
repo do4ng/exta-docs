@@ -1,0 +1,55 @@
+You can provide params for static page generation through `getStaticParams()` and store static data on the server via `getStaticProps()`.
+
+`getStaticParams` and `getStaticProps` are executed only once: during page compilation in development mode, or when a page is first built in production mode (i.e., when static pages are generated).
+
+```ts
+export function getStaticParams() {}
+
+export function getStaticProps() {}
+```
+
+<Box type="info">
+  The function names above may change during development. We adopted the most
+  commonly used names to make them intuitive and avoid confusion in the
+  development phase. The unique identity of this package will be established as
+  development progresses
+</Box>
+
+## getStaticParams()
+
+In a dynamic route page, `getStaticParams` provides the possible parameter values to generate static routes.
+Only the paths returned by this function will be generated at build time.
+
+```ts
+// pages/[slug].tsx
+export function getStaticParams() {
+  return [{ slug: "hello" }];
+}
+```
+
+- `/hello` => <Badge type="tip">200</Badge>
+- `/foo` => <Badge type="error">404</Badge>
+
+---
+
+## getStaticProps()
+
+This function is used to generate static data on the server.
+It runs only once during the build process and passes the returned props to the page.
+
+```tsx
+// pages/hello/[name].tsx
+export function getStaticParams() {
+  return [{ name: "world" }, { name: "John" }];
+}
+
+export function getStaticProps({ params }) {
+  return { message: `Hello ${params.name}` };
+}
+
+export default function ({ props }) {
+  return <>{props.message}</>;
+}
+```
+
+With the example above, the routes `/hello/world` and `/hello/John` will be generated at build time, each rendering the corresponding message.

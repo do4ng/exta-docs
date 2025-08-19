@@ -1,0 +1,28 @@
+Since exta is built on top of Vite, you can style your app by importing style files or registering them in the `index.html` file.
+
+```ts
+import "../styles.scss";
+```
+
+<Box type="warning">
+  For files that require separate compilation, such as `scss`, you need to
+  install an additional package (e.g., `node-sass`).
+</Box>
+
+## Stylesheets on the server
+
+Files for styling (`.css`, `.scss`, etc.) cannot be loaded on the server. Therefore, exta excludes all files recognized as style files from the server.
+
+```ts
+// ...
+export default defineConfig({
+  plugins: [
+    // ...
+    exta({
+      compileOptions: {
+        assetsExtensions: [".customcss"],
+      },
+    }),
+  ],
+});
+```

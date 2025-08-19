@@ -1,0 +1,29 @@
+exta generates static pages using its own compiler on top of Vite's build functionality.
+
+```bash
+vite build
+```
+
+Before building, be aware that there is a difference between the production app and the development server app.
+
+## \$exta-router
+
+\$exta-router operates based on various browser-provided features. However, during the SSR process in the build, browser features are not available. To prevent potential issues, the server sends router information based on file names.
+
+1. Dynamic routes are determined by file names and `getStaticParams()`.
+
+2. Default routes are also determined based on file names.
+
+3. `_layout` receives a URL based on the corresponding page.
+
+4. Files like `_error`, which cannot be determined based on file names, are assigned `.exta/ssr:unknown`.
+
+## Styles Asset
+
+Asset files like `.css` handled by Vite cannot be loaded on the server. Therefore, these files are ignored by the server.
+
+## Data Fetching
+
+The way data is loaded also changes.
+
+In development mode, data is fetched from a page in the form of `/.exta/__page_data?page={URL}`, but in production mode, it is loaded from pre-generated static data in the `/data/` directory.

@@ -1,0 +1,67 @@
+## Download template
+
+The easiest way to get started with the exta app is to download a pre-made template.
+
+```bash
+git clone https://github.com/do4ng/exta-template my-app
+```
+
+After this prompt, go to the directory and type a command (like `npm install`) to install the dependencies.
+
+## Manual installation
+
+You can also install exta into an existing project.
+
+Since exta is a vite-based framework, please install dependencies related to vite and react.
+
+```bash
+npm i --save-dev exta vite @vitejs/plugin-react
+npm i --save-dev react react-dom
+```
+
+And create `vite.config.ts` and configure the configuration file as follows:
+
+```ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+import { exta } from "exta";
+
+export default defineConfig({
+  plugins: [react(), exta()],
+});
+```
+
+Then, add the following scripts to your `package.json` file:
+
+```json
+{
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}
+```
+
+Last, create `index.html` and add required scripts and container.
+
+```html {3, 7}
+<head>
+  <!-- ... -->
+  <script src="/.exta/client.js" type="module"></script>
+</head>
+<body>
+  <!-- ... -->
+  %body%
+</body>
+```
+
+## Setup Typescript
+
+To make full use of the types provided by exta, create a `.d.ts` file like the following:
+
+```ts
+// env.d.ts
+import "exta/env.d.ts";
+```

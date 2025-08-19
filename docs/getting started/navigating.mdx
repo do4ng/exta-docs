@@ -1,0 +1,95 @@
+Using the modules provided by **exta**, users can experience smoother navigation between pages.
+
+Since exta is a static site generator primarily designed for documentation, blogs, and landing pages, smooth page transitions are considered a top priority.
+When a user first visits the site, all page components are **prefetched for rendering**.
+During navigation, only the corresponding **static props** are downloaded, ensuring fast and seamless page transitions.
+
+---
+
+## `<Link />`
+
+The `<Link />` component enables client-side navigation without triggering a full page reload.
+
+> When a `<Link />` is clicked, the static props for the target page are downloaded and cached.
+
+```tsx
+import { Link } from "exta/components";
+
+export default function () {
+  return <Link href="/">Go to Home</Link>;
+}
+```
+
+<Box type="warning">Navigating to external URLs is not allowed.</Box>
+
+---
+
+## \$exta-router
+
+`$exta-router` is the core router of exta, provided as a Vite virtual module.
+
+```ts
+import {
+  useLocation,
+  useParams,
+  useRouter,
+  router,
+  usePathname,
+  useSearchQuery,
+} from "$exta-router";
+```
+
+### `useLocation()` <Badge type="warning">React Only</Badge>
+
+Returns the current location.
+This hook can only be used inside React components.
+
+```ts
+const location = useLocation(); // href
+const pathname = usePathname(); // pathname
+const query = useSearchQuery(); // searchQuery
+```
+
+---
+
+### `useParams()` <Badge type="warning">React Only</Badge>
+
+Returns the parameters of a dynamic route.
+It is built on top of `useLocation()`.
+
+```ts
+const params = useParams();
+```
+
+This hook can also be used inside special files such as `_layout`.
+
+---
+
+### `useRouter()` <Badge type="warning">React Only</Badge>
+
+Provides router utilities for URL navigation.
+It is also based on `useLocation()`.
+
+```ts
+const { location, push, replace } = useRouter();
+```
+
+---
+
+### `router`
+
+A core router instance that manages modules and static props.
+
+```ts
+await router.goto("/");
+// Instructs the router to download and cache static props for the "/" page.
+// Navigating to external URLs is not allowed.
+```
+
+Unlike `useRouter`, calling `router.goto()` **does not navigate** to the page — it only downloads the associated data.
+Therefore, when navigating programmatically without `<Link />`, you should combine both:
+
+```ts
+await router.goto(href); // prefetch static props
+useRouter().push(href); // navigate to the page
+```
