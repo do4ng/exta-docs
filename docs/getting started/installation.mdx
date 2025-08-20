@@ -65,3 +65,24 @@ To make full use of the types provided by exta, create a `.d.ts` file like the f
 // env.d.ts
 import "exta/env.d.ts";
 ```
+
+## Rule of `index.html`
+
+The `index.html` file must follow these rules:
+
+1. It must be located in the root directory.
+2. The exta client script must be registered inside the `<head>`.
+3. You must include `%body%` inside the `<body>` to indicate to the server where to inject code.
+
+<Box type="info">
+  ```html
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="/.exta/client.js" type="module"></script>
+    </head>
+    <body>%body%</body>
+  </html>
+  ```
+</Box>

@@ -22,6 +22,20 @@ export default function () {
 
 <Box type="warning">Navigating to external URLs is not allowed.</Box>
 
+### Prefetch
+
+By default, the `<Link />` component pre-downloads the static data for the target page. This may lead to issues such as performance degradation and excessive network requests, so you can disable this prefetching if needed.
+
+```tsx
+export default function () {
+  return (
+    <Link href="/" prefetch={false}>
+      Prefetch: false
+    </Link>
+  );
+}
+```
+
 ---
 
 ## \$exta-router
