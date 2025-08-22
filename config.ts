@@ -34,6 +34,7 @@ export default [
           { navigating: "Navigating" },
           { "build-app": "Build" },
           { styling: "Styling" },
+          { image: "Image" },
         ],
       },
       {

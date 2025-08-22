@@ -6,6 +6,10 @@ vite build
 
 Before building, be aware that there is a difference between the production app and the development server app.
 
+## Server Side Rendering
+
+By default, exta runs only with JavaScript in development mode, while in production mode it uses HTML (server-rendered) + JavaScript to implement pages. Because of this, there may be differences between the app in development mode and the app in production mode.
+
 ## \$exta-router
 
 \$exta-router operates based on various browser-provided features. However, during the SSR process in the build, browser features are not available. To prevent potential issues, the server sends router information based on file names.

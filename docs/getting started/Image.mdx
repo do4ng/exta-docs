@@ -1,0 +1,19 @@
+The `<Image />` component preloads the specified image at the same time the page is loaded.
+
+```tsx
+import { Image } from "exta/components";
+
+export default function () {
+  return (
+    <>
+      <Image src="/emoji.png" alt="Emoji"></Image>
+    </>
+  );
+}
+```
+
+<Box type="info">
+  exta performs SSR only in production mode. Since the `<Image />` component
+  preloads images to ensure that server-rendered HTML is displayed smoothly, its
+  effects can only be seen in production mode.
+</Box>{" "}
