@@ -1,0 +1,18 @@
+The `<Link />` component enables client-side navigation without triggering a full page reload.
+
+```tsx
+import { Link } from "exta/components";
+
+export default function () {
+  return <Link href="/">Go to Home</Link>;
+}
+```
+
+<Box type="warning">Navigating to external URLs is not allowed.</Box>
+
+## When you click
+
+1. Click the `<Link />`
+2. Execute `props.onClick`
+3. Fetch page data
+4. Push

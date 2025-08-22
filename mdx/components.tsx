@@ -67,7 +67,11 @@ export const components = {
     );
   },
   h3: (props: any) => {
-    const id = props.children.toString().replace(/ /g, "-").toLowerCase();
+    const text = extractText(props.children);
+    const id = text
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\-]/g, "");
     return (
       <h3 id={id} {...props.children.props}>
         <a href={`#${id}`}>#</a>
