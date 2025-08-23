@@ -32,8 +32,9 @@ export default [
           { "layout-404": "Layout and Error" },
           { "static-props": "Static Props" },
           { navigating: "Navigating" },
-          { "build-app": "Build" },
           { styling: "Styling" },
+          { "build-app": "Build" },
+          { deploy: "Deploy" },
         ],
       },
       {
