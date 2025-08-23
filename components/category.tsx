@@ -15,8 +15,6 @@ export function CategoryMenu({
   let targetcategory: string | null = null;
   const params = useParams();
 
-  console.log(params);
-
   const target = config.find(({ title }) => title === params.category);
 
   target?.category?.forEach((category) => {
@@ -26,8 +24,6 @@ export function CategoryMenu({
       }
     });
   });
-
-  console.log(params);
 
   const [hide, setHide] = useState(hidden);
 

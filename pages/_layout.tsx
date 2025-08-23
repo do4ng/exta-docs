@@ -35,8 +35,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const path = usePathname().split("/")[1];
 
-  console.log(usePathname());
-
   const isDocs =
     path === "docs" ||
     path === "plugins" ||
