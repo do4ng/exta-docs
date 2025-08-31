@@ -82,6 +82,9 @@ export async function getStaticProps({ params }) {
   ).toString();
 
   const compiled = await compileMdx(raw);
+
+  console.log(target);
+
   return {
     compiled,
     raw,

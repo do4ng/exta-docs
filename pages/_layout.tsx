@@ -13,6 +13,8 @@ import { capitalizeFirstLetter } from "@/lib/up";
 import { Header } from "../components/header";
 import { CategoryMenu } from "../components/category";
 
+import React from "react";
+
 export function toggleTheme(to: "dark" | "white" = "dark") {
   if (typeof window === "undefined") return;
   document.querySelector("html").setAttribute("class", to);
@@ -35,12 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const path = usePathname().split("/")[1];
 
-  const isDocs =
-    path === "docs" ||
-    path === "plugins" ||
-    path === "apis" ||
-    path === "guide" ||
-    path === "serpack";
+  const isDocs = path === "docs" || path === "changelog";
 
   if (typeof window !== "undefined") {
     toggleTheme((localStorage.getItem("theme") as any) || "dark");
@@ -61,7 +58,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="menu-layout">
                 <div className="menu-categories">
                   {config
-                    .filter(({ title }) => title.toLowerCase() !== "serpack")
+                    .filter(({ title }) => title.toLowerCase() !== "changelog")
                     .map((c) => (
                       <div
                         key={c.title}
@@ -88,11 +85,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="menu-content">
                   {target ? (
                     target.category.map((category) => (
-                      <CategoryMenu
-                        hidden={category.hidden || false}
-                        category={category as any}
-                        key={category.name}
-                      ></CategoryMenu>
+                      <>
+                        <CategoryMenu
+                          hidden={category.hidden || false}
+                          category={category as any}
+                          key={category}
+                        ></CategoryMenu>
+                      </>
                     ))
                   ) : (
                     <>page not found</>

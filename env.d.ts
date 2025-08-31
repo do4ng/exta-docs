@@ -1,1 +1,1 @@
-import "exta/env";
+import "exta/env.d.ts";

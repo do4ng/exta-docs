@@ -35,6 +35,7 @@ export default [
           { styling: "Styling" },
           { "build-app": "Build" },
           { deploy: "Deploy" },
+          { sitemap: "Sitemap" },
         ],
       },
       {
@@ -49,6 +50,21 @@ export default [
         name: "Community",
         hidden: true,
         posts: [{ community: "Community" }, { contributing: "Contributing" }],
+      },
+    ],
+  },
+  {
+    title: "changelog",
+    target: "changelog",
+
+    category: [
+      {
+        name: "Overview",
+        posts: [{ changelog: "Changelog" }],
+      },
+      {
+        name: "Changelogs",
+        posts: [{ "0-0-1-beta-20": "v0.0.1-beta.20" }],
       },
     ],
   },

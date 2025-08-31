@@ -7,9 +7,11 @@ import config, { Category } from "@/config";
 export function CategoryMenu({
   category,
   hidden,
+  key,
 }: {
   category: Category;
   hidden: boolean;
+  key: Category;
 }) {
   // eslint-disable-next-line no-unused-vars
   let targetcategory: string | null = null;

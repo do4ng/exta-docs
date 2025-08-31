@@ -5,9 +5,7 @@ import { toggleTheme } from "@/pages/_layout";
 import { useEffect, useState } from "react";
 import { TextLabel } from "./label";
 
-export function ThemeSelector() {
-  const [defaultValue, setDefaultValue] = useState("dark");
-
+export function ThemeSelector({ defaultValue, setDefaultValue }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const theme = (localStorage.getItem("theme") as any) || "dark";

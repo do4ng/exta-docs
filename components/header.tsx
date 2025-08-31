@@ -4,7 +4,7 @@
 
 import "remixicon/fonts/remixicon.css";
 
-import { Link } from "exta/components";
+import { Image, Link } from "exta/components";
 import { Popover } from "@/components/popper";
 import docs from "@/docs";
 import { TextLabel } from "@/components/label";
@@ -17,6 +17,17 @@ export function Header() {
   const path = pathname[1];
 
   const [isScrolled, setScrolled] = useState(false);
+
+  const [defaultValue, setDefaultValue] = useState("dark");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const theme = (localStorage.getItem("theme") as any) || "dark";
+      setDefaultValue(theme);
+
+      console.log(`[app] theme selected: ${theme}`);
+    }
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -42,9 +53,7 @@ export function Header() {
     <>
       <header
         className={`header-container text ${
-          path.trim() !== "" &&
-          path.trim() !== "changelog" &&
-          path.trim() !== "blog"
+          path.trim() !== "" && path.trim() !== "blog"
             ? ""
             : "transparent-header"
         } ${isScrolled ? "scrolled" : ""}`}
@@ -89,13 +98,16 @@ export function Header() {
 
           <div className="item-3">
             <TextLabel text="What's new?">
-              <Link href="/changelog">
+              <Link href="/changelog/changelog">
                 <p>
                   <i className="ri-receipt-line"></i>
                 </p>
               </Link>
             </TextLabel>
-            <ThemeSelector></ThemeSelector>
+            <ThemeSelector
+              defaultValue={defaultValue}
+              setDefaultValue={setDefaultValue}
+            ></ThemeSelector>
             <TextLabel text="github">
               <a
                 target="_blank"
