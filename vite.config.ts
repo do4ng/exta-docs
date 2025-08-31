@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { exta } from "exta";
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync, existsSync } from "fs";
 import path from "path";
 
 import config from "./config";
@@ -11,11 +11,12 @@ export default defineConfig({
     react(),
     exta(),
     {
-      name: "sitemap",
+      name: "sitemap-and-learning-files",
       apply: "build",
-      buildEnd() {
+      closeBundle() {
         const baseUrl = "https://extajs.netlify.app";
         const sitemap: string[] = [];
+        const learningFiles: string[] = [];
 
         sitemap.push('<?xml version="1.0" encoding="UTF-8"?>');
         sitemap.push(
@@ -28,19 +29,44 @@ export default defineConfig({
           for (const cat of category) {
             for (const post of cat.posts) {
               const [slug] = Object.keys(post);
+
+              // URL
               const url = `${baseUrl}/${title}/${slug}`;
               sitemap.push(`  <url>`);
               sitemap.push(`    <loc>${url}</loc>`);
               sitemap.push(`  </url>`);
+
+              // 실제 파일 경로 (./{title}/{slug}.mdx)
+              const docsPath = path.resolve(
+                `./${title}/${cat.name}/${slug}.mdx`
+              );
+              if (existsSync(docsPath)) {
+                const content = readFileSync(docsPath, "utf-8");
+                learningFiles.push(
+                  `# URL: /${title}/${slug}\n# FILE: ${docsPath}\n\n${content}\n\n---\n`
+                );
+              } else {
+                learningFiles.push(
+                  `# URL: /${title}/${slug}\n# FILE: ${docsPath}\n\n[파일 없음]\n\n---\n`
+                );
+              }
             }
           }
         }
 
         sitemap.push("</urlset>");
 
+        // sitemap.xml 생성
         writeFileSync(
           path.resolve("./dist/sitemap.xml"),
           sitemap.join("\n"),
+          "utf-8"
+        );
+
+        // learning-files.txt 생성 (모든 mdx 파일 내용 포함)
+        writeFileSync(
+          path.resolve("./dist/learning-files.txt"),
+          learningFiles.join("\n"),
           "utf-8"
         );
       },
