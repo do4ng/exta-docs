@@ -44,7 +44,7 @@ export default {
       children: [
         {
           title: "Docs",
-          href: "/docs/overview",
+          href: "/docs/why-exta",
           description: "Learn all of information of package.",
           // https://remixicon.com/icon/book-open-line
           icon: "ri-book-open-line",
@@ -58,6 +58,11 @@ export default {
           icon: "ri-sticky-note-line",
         },
       ],
+    },
+    {
+      title: "Changelog",
+      type: "link",
+      href: "/changelog/changelog",
     },
   ],
 } as Docs;

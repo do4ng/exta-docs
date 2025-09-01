@@ -60,7 +60,7 @@ export function Header() {
       >
         <div className="header">
           <Link className="item-1 logo" href="/">
-            {docs.name} <span className="docs-icon">Beta</span>
+            {docs.name} <span className="docs-icon">docs</span>
           </Link>
 
           <div className="item-2">
