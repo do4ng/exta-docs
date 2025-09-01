@@ -64,7 +64,10 @@ export default [
       },
       {
         name: "Changelogs",
-        posts: [{ "0-0-1-beta-20": "v0.0.1-beta.20" }],
+        posts: [
+          { "0-0-1-beta-22": "v0.0.1-beta.22" },
+          { "0-0-1-beta-20": "v0.0.1-beta.20" },
+        ],
       },
     ],
   },
