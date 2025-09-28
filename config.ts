@@ -18,7 +18,7 @@ export default [
   {
     title: "docs",
     icon: "book-open-line",
-    target: "overview",
+    target: "why-exta",
     category: [
       {
         name: "Overview",
@@ -37,6 +37,10 @@ export default [
           { deploy: "Deploy" },
           { sitemap: "Sitemap" },
         ],
+      },
+      {
+        name: "APIs",
+        posts: [{ "exta-router": "Router" }],
       },
       {
         name: "Components",
@@ -65,6 +69,7 @@ export default [
       {
         name: "Changelogs",
         posts: [
+          { "0-0-1-beta-25": "v0.0.1-beta.25" },
           { "0-0-1-beta-22": "v0.0.1-beta.22" },
           { "0-0-1-beta-20": "v0.0.1-beta.20" },
         ],
